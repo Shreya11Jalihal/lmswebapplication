@@ -12,15 +12,13 @@ export class AppComponent implements OnInit{
   title = 'Learning Management System';
 
   displayedColumns: string[] = ['courseId','name','instructor','price','schedules'];
-  displayedSchedules: string[]=['scheduleId','Date','slots']
   dataSource : Course[];
-  schedules: Schedule[];
-
  
   constructor(private courseService: CourseService) { }
 
   courses:Course[];
   availableDates: Schedule[];
+
 
   ngOnInit(): void {
     this.loadCourses();
@@ -30,13 +28,11 @@ export class AppComponent implements OnInit{
     this.courseService.getCourses()
       .subscribe(data => {
         console.log(data)
-        this.courses=data;
         this.dataSource = data;
+        if(data!=null)
         this.availableDates = data[0].availableDates;
-       // console.log(this.availableDates)
+        console.log(this.availableDates)
       })      
   }
-
-
 
 }
